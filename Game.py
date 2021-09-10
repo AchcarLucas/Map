@@ -23,9 +23,12 @@ class Game():
         while self.gameRunning:
             for event in pygame.event.get():
                 self.event(event)
+
+        self.gameUpdate()
+        self.gameRender()
         
     # função de eventos
-    def event(self, event):
+    def gameEvent(self, event):
         if(event.type == pygame.QUIT):
             self.gameRunning = False
         if(event.type == pygame.KEYDOWN):
@@ -33,11 +36,11 @@ class Game():
                 self.gameRunning = False
 
     # função de atualização
-    def update(self, deltaTime):
+    def gameUpdate(self, deltaTime):
         pass
 
     # função de renderização
-    def render(self, deltaTime):
+    def gameRender(self, deltaTime):
         pass
 
 game = Game((800, 600), 'Game - Map')
