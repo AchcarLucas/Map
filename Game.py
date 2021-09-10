@@ -2,12 +2,13 @@ import pygame
 import Map
 
 class Game():
-    def __init__(self, screenSize, title='Game', icon=None):
+    def __init__(self, screenSize, fps=60, title='Game', icon=None):
         # inicializa as variáveis da classe
         self.gameRunning = True
         self.screenSize = screenSize
         self.title = title
         self.icon = icon
+        self.fps = fps
 
         # inicializa o game
         self.initGame()
@@ -18,14 +19,18 @@ class Game():
         if(self.icon != None):
             pygame.display.set_icon(self.icon)
 
+        self.gameClock = pygame.time.Clock()
+
     # função principal do jogo
     def gameMain(self):
         while self.gameRunning:
+            deltaTime = self.gameClock.tick(self.fps)
+
             for event in pygame.event.get():
                 self.gameEvent(event)
 
-        self.gameUpdate()
-        self.gameRender()
+            self.gameUpdate(deltaTime)
+            self.gameRender(deltaTime)
         
     # função de eventos
     def gameEvent(self, event):
@@ -43,5 +48,5 @@ class Game():
     def gameRender(self, deltaTime):
         pass
 
-game = Game((800, 600), 'Game - Map')
+game = Game((800, 600), title='Game - Map')
 game.gameMain()
