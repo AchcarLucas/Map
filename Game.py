@@ -80,6 +80,3 @@ class Game():
 
 game = Game((800, 600), title='Game - Map')
 game.gameMain()
-
-if __name__ == '__main__':
-    pass
