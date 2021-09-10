@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>c638471c-f97e-42e7-bf34-47ed2584087c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Map.py</StartupFile>
+    <StartupFile>Game.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,7 +21,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Map.py" />
+    <Compile Include="Game.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\" />
