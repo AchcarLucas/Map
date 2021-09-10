@@ -1,4 +1,5 @@
 import pygame
+import Map
 
 class Game():
     def __init__(self, screenSize, title='Game', icon=None):
@@ -21,10 +22,10 @@ class Game():
     def gameMain(self):
         while self.gameRunning:
             for event in pygame.event.get():
-                self.gameEvent(event)
+                self.event(event)
         
     # função de eventos
-    def gameEvent(self, event):
+    def event(self, event):
         if(event.type == pygame.QUIT):
             self.gameRunning = False
         if(event.type == pygame.KEYDOWN):
@@ -32,11 +33,11 @@ class Game():
                 self.gameRunning = False
 
     # função de atualização
-    def gameUpdate(self, deltaTime):
+    def update(self, deltaTime):
         pass
 
     # função de renderização
-    def gameRender(self, deltaTime):
+    def render(self, deltaTime):
         pass
 
 game = Game((800, 600), 'Game - Map')
