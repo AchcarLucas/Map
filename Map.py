@@ -1,7 +1,7 @@
 import pygame
 
 class Map:
-    def __init__(self, sheet, ):
+    def __init__(self, sheet):
         pass
 
     def event(self, event):
