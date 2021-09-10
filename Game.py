@@ -1,5 +1,6 @@
 import pygame
-import Map
+import os
+import Map as map
 
 class Game():
     '''
@@ -22,15 +23,24 @@ class Game():
         self.icon = icon
         self.fps = fps
 
-        # Lista contendo todas as sheets
-        self.sheets = []
-        # Lista contendo todos os mapas
-        self.maps = []
-
-        self.maps.append(Map())
-
         # inicializa o game
         self.initGame()
+
+        # lista contendo todas as sheets
+        self.sheets = []
+
+        # carrega as sheets
+        self.sheets.append(pygame.image.load(os.path.join('assets', 'hyptosis_tile-art-batch-1.png')).convert())
+        self.sheets.append(pygame.image.load(os.path.join('assets', 'hyptosis_til-art-batch-2.png')).convert())
+
+        tempMap = [[1, 1, 1, 2, 2, 2],
+                   [1, 1, 1, 2, 2, 2]]
+
+        # lista contendo todos os mapas
+        self.maps = []
+
+        # carrega os mapas
+        self.maps.append(map.Map(self.sheets[0], (32, 32), tempMap))
         
     def initGame(self):
         '''
