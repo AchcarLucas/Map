@@ -22,7 +22,7 @@ class Game():
     def gameMain(self):
         while self.gameRunning:
             for event in pygame.event.get():
-                self.event(event)
+                self.gameEvent(event)
 
         self.gameUpdate()
         self.gameRender()
