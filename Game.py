@@ -68,6 +68,10 @@ class Game():
 
             self.gameUpdate(deltaTime)
             self.gameRender(deltaTime)
+
+            pygame.display.update()
+
+        pygame.quit()
         
     # função de eventos
     def gameEvent(self, event):
@@ -87,7 +91,7 @@ class Game():
             Função responsável por atualizar a lógica do jogo
             deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
         '''
-        pass
+        self.maps[0].update(deltaTime)
 
     # função de renderização
     def gameRender(self, deltaTime):
@@ -95,7 +99,7 @@ class Game():
             Função responsável por desenhar na tela do jogo
             deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
         '''
-        pass
+        self.maps[0].render(deltaTime)
 
 game = Game((800, 600), title='Game - Map')
 game.gameMain()
