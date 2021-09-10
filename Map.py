@@ -22,10 +22,22 @@ class Map:
         self.struct_map = struct_map
 
     def event(self, event):
+        '''
+            Função responsável por gerenciar os eventos do mapa
+            event -> contém a estrutura do evento (veja a documentação do pygame para mais detalhes)
+        '''
         pass
 
     def update(self, deltaTime):
+        '''
+            Função responsável por atualizar a lógica do mapa
+            deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
+        '''
         pass
 
     def render(self, deltaTime):
+        '''
+            Função responsável por desenhar o mapa na tela
+            deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
+        '''
         pass
