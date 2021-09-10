@@ -5,20 +5,29 @@ class Game():
     '''
         Classe responsável por gerenciar o jogo
     '''
-    def __init__(self, screenSize, fps=60, title='Game', icon=None):
+    def __init__(self, screenSize : (int, int), fps=60, title='Game', icon=None):
         '''
             Construtor da Classe Game, possui como parâmetro
-                screenSize  -> tupla contendo largura e altura, ex (800, 600)
-                fps         -> contendo da taxa de atualização da tela
-                title       -> contendo o titulo do jogo
-                icon        -> contendo uma surface (imagem) com o icone a ser exibido na tela
+                screenSize  ->  tupla contendo de dois valores inteiros (int, int) 
+                                que corresponde a largura e altura, ex (800, 600)
+                fps         ->  contendo da taxa de atualização da tela
+                title       ->  contendo o titulo do jogo
+                icon        ->  contendo uma surface (imagem) com o icone a ser exibido na tela
         '''
         # inicializa as variáveis da classe
         self.gameRunning = True
         self.screenSize = screenSize
+
         self.title = title
         self.icon = icon
         self.fps = fps
+
+        # Lista contendo todas as sheets
+        self.sheets = []
+        # Lista contendo todos os mapas
+        self.maps = []
+
+        self.maps.append(Map())
 
         # inicializa o game
         self.initGame()
