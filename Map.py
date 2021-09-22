@@ -80,6 +80,7 @@ class Map:
         '''
         screenSize = pygame.display.get_window_size()
 
+        # desenha a quantidade de tiles necessário para preencher a tela inteira, limitando apenas a tela principal
         xMaxTiles = np.ceil(screenSize[0] / self.dimension_tiles[0]) + 1
         yMaxTiles = np.ceil(screenSize[1] / self.dimension_tiles[1]) + 1
 
