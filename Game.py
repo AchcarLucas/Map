@@ -71,6 +71,8 @@ class Game():
 
         # carrega os mapas
         self.maps.append(map.Map(self.tilesheets[1], (32, 32), temp_struct_map, offset = (self.moveMapX, self.moveMapY), map_name='Mapa 1'))
+
+        self.currentMap = self.maps[0]
         
     def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1, 1)):
         '''
@@ -146,7 +148,6 @@ class Game():
             Função responsável por atualizar a lógica do jogo
             deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
         '''
-
         keys = pygame.key.get_pressed()
 
         if(keys[pygame.K_d]):
@@ -162,9 +163,9 @@ class Game():
             self.moveMapY += 1
 
 
-        self.maps[0].setOffset((self.moveMapX, self.moveMapY))
+        self.currentMap.setOffset((self.moveMapX, self.moveMapY))
 
-        self.maps[0].update(deltaTime)
+        self.currentMap.update(deltaTime)
 
     # função de renderização
     def gameRender(self):
@@ -172,7 +173,7 @@ class Game():
             Função responsável por desenhar na tela do jogo
             deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
         '''
-        self.maps[0].render(self.screen)
+        self.currentMap.render(self.screen)
 
 game = Game((800, 600), title='Game - Map')
 game.gameMain()
