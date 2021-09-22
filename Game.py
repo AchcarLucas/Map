@@ -1,5 +1,7 @@
 import pygame
+import numpy as np
 import os
+
 import Map as map
 
 class Game():
@@ -27,21 +29,73 @@ class Game():
         self.initGame()
 
         # lista contendo todas as sheets
-        self.sheets = []
+        self.tilesheets = []
 
         # carrega as sheets
-        self.sheets.append(pygame.image.load(os.path.join('assets', 'hyptosis_tile-art-batch-1.png')).convert())
-        self.sheets.append(pygame.image.load(os.path.join('assets', 'hyptosis_til-art-batch-2.png')).convert())
+        self.tilesheets.append(self.loadSpriteSheetPacket('./assets', 'hyptosis_tile-art-batch-1.png', (32, 32)))
+        self.tilesheets.append(self.loadSpriteSheetPacket('./assets', 'hyptosis_til-art-batch-2.png', (32, 32)))
 
-        tempMap = [[1, 1, 1, 2, 2, 2],
-                   [1, 1, 1, 2, 2, 2]]
+        ############### Temporário #################
+        temp_struct_map = np.arange(22 * 6 * 4).reshape(22, 6 * 4)
+
+        temp_struct_map[0, ] = [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
+        temp_struct_map[1, ] = [6, 7, 8, 9, 10, 11, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
+        temp_struct_map[2, ] = [12, 13, 14, 15, 16, 17, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5]
+        temp_struct_map[3, ] = [18, 19, 20, 21, 22, 23, 18, 19, 20, 21, 22, 23, 18, 19, 20, 21, 22, 23, 18, 19, 20, 21, 22, 23]
+        temp_struct_map[4, ] = [24, 25, 26, 27, 28, 29, 24, 25, 26, 27, 28, 29, 24, 25, 26, 27, 28, 29, 24, 25, 26, 27, 28, 29]
+        temp_struct_map[5, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[6, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[7, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[8, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[9, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[10, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[11, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[12, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[13, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[14, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[15, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[16, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[17, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[18, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[19, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[20, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        temp_struct_map[21, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+
+        self.moveMapX = 0
+        self.moveMapY = 0
+
+        ################################
 
         # lista contendo todos os mapas
         self.maps = []
 
         # carrega os mapas
-        self.maps.append(map.Map(self.sheets[0], (32, 32), tempMap))
+        self.maps.append(map.Map(self.tilesheets[1], (32, 32), temp_struct_map, offset = (self.moveMapX, self.moveMapY), map_name='Mapa 1'))
         
+    def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1, 1)):
+        '''
+            Função loadSpriteSheetPacket, cria uma lista de sprites a partir de uma spritesheet
+                imagePath       ->  local onde deve ser lido as imagens
+                spriteSheetName ->  nome do arquivo a ser carregado
+                dimensionSheet  ->  dimensão da sprite (largura e altura)
+                scaleSprite     ->  escala das imagens no eixo x e no eixo y
+                Ex: loadSpriteSheetPacket('./assets', 'sheet.png', (64, 64), (1, 1))
+        '''
+        tempSprites = []
+
+        tempSpriteSheet = pygame.image.load(os.path.join(imagePath, spriteSheetName)).convert_alpha()
+
+        for y in range(0, int((tempSpriteSheet.get_height() / dimensionSheet[1]))):
+            for x in range(0, int((tempSpriteSheet.get_width() / dimensionSheet[0]))):
+                tempImage = pygame.Surface(dimensionSheet)
+                tempImage = tempSpriteSheet.subsurface((np.floor(x * dimensionSheet[0]), np.floor(y * dimensionSheet[1]), dimensionSheet[0], dimensionSheet[1]))
+                
+                tempSprites.append(tempImage)
+
+                print(f'SpriteSheet - [{spriteSheetName}] - Clip SubSurface [{x * dimensionSheet[0], y * dimensionSheet[1], dimensionSheet[0], dimensionSheet[1]}]')
+
+        return tempSprites
+
     def initGame(self):
         '''
             Função responsável por inicializar e configurar a tela do jogo,
@@ -62,12 +116,13 @@ class Game():
         '''
         while self.gameRunning:
             deltaTime = self.gameClock.tick(self.fps)
+            self.screen.fill((0, 0, 0))
 
             for event in pygame.event.get():
                 self.gameEvent(event)
 
             self.gameUpdate(deltaTime)
-            self.gameRender(deltaTime)
+            self.gameRender()
 
             pygame.display.update()
 
@@ -91,15 +146,33 @@ class Game():
             Função responsável por atualizar a lógica do jogo
             deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
         '''
+
+        keys = pygame.key.get_pressed()
+
+        if(keys[pygame.K_d]):
+            self.moveMapX += 1
+
+        if(keys[pygame.K_a]):
+            self.moveMapX -= 1
+
+        if(keys[pygame.K_w]):
+            self.moveMapY -= 1
+
+        if(keys[pygame.K_s]):
+            self.moveMapY += 1
+
+
+        self.maps[0].setOffset((self.moveMapX, self.moveMapY))
+
         self.maps[0].update(deltaTime)
 
     # função de renderização
-    def gameRender(self, deltaTime):
+    def gameRender(self):
         '''
             Função responsável por desenhar na tela do jogo
             deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
         '''
-        self.maps[0].render(deltaTime)
+        self.maps[0].render(self.screen)
 
 game = Game((800, 600), title='Game - Map')
 game.gameMain()

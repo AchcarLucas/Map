@@ -1,4 +1,5 @@
 import pygame
+import numpy as np
 
 class Map:
     '''
@@ -7,19 +8,91 @@ class Map:
         você deve definir no update principal do jogo qual mapa vai ser desenhado
         utilizando a variável de controle do objeto mapa criado por você
     '''
-    def __init__(self,  sheet : pygame.Surface, 
-                        tilesDimension : (int, int),
-                        struct_map : []):
+    def __init__(self,  tile_sheets : pygame.Surface, 
+                        dimension_tiles : (int, int),
+                        struct_map,
+                        offset = (0, 0),
+                        map_name = 'None'):
         '''
             Construtor da Classe Map, possui como parâmetro
-                sheet           ->  surface (sheet) contendo todo o bloco de construção para o mapa
-                tilesDimension  ->  tupla de dois valores inteiros (int, int) correspondente a 
-                                    largura e altura da tiles
-                struct_map      ->  estrutura array de duas dimensões contendo a estrutura do mapa
+                tile_sheets             ->  surface (tilesheet) contendo todo o bloco de construção para o mapa
+                dimension_tiles         ->  tupla de dois valores inteiros (int, int) correspondente a 
+                                            largura e altura da tiles
+                struct_map              ->  estrutura array de duas dimensões contendo a estrutura do mapa
+                offset                  ->  posição inicial do mapa, por padrão é (0, 0)
+                map_name                ->  nome do mapa (opcional)
         '''
-        self.sheet = sheet
-        self.tilesDimension = tilesDimension
+
+        self.dimension_tiles = dimension_tiles
+        self.offset = offset
+
+        self.tile_sheets = tile_sheets
         self.struct_map = struct_map
+
+        self.map_name = map_name
+
+        self.map_line = self.struct_map.shape[0]
+        self.map_column = self.struct_map.shape[1]
+
+        self.dimension_map = (self.map_column * self.dimension_tiles[0], 
+                              self.map_line * self.dimension_tiles[1])
+
+        print(f'Width Map: {self.dimension_tiles[0]}')
+        print(f'Height Map: {self.dimension_tiles[1]}')
+        print(f'Map Name: {self.map_name}')
+
+    def getStructMap(self):
+        '''
+            getting da estrutura do mapa
+        '''
+        return self.struct_map
+
+    def setStructMap(self, struct_map):
+        '''
+            setting da estrutura do mapa
+        '''
+        self.struct_map = struct_map
+        
+
+    def getOffset(self):
+        '''
+            getting do offset da posição do mapa
+        '''
+        return self.offset
+
+    def setOffset(self, offset = (int, int)):
+        '''
+            setting do offset da posição do mapa
+        '''
+        self.offset = offset
+
+    def drawMapSurface(self, screen):
+        '''
+            Função responsável por desenhar o mapa na tela (Respeitando o sistema de offset)
+        '''
+        screenSize = pygame.display.get_window_size()
+
+        xMaxTiles = np.ceil(screenSize[0] / self.dimension_tiles[0]) + 1
+        yMaxTiles = np.ceil(screenSize[1] / self.dimension_tiles[1]) + 1
+
+        for y in range(0, int(yMaxTiles)):
+            tilesY = np.maximum(0, y + int(self.offset[1] / self.dimension_tiles[1]))
+
+            if(tilesY >= self.map_line):
+                break
+
+            for x in range(0, int(xMaxTiles)):
+                tilesX = np.maximum(0, x - int(self.offset[0] / self.dimension_tiles[0]))
+
+                if(tilesX >= self.map_column):
+                    break
+
+                tile = self.struct_map[tilesY][tilesX]
+
+                screen.blit(self.tile_sheets[tile], (
+                                                    (tilesX * self.dimension_tiles[0] + self.offset[0]), 
+                                                    (tilesY * self.dimension_tiles[1] - self.offset[1])
+                                                    ))
 
     def event(self, event):
         '''
@@ -35,9 +108,10 @@ class Map:
         '''
         pass
 
-    def render(self, deltaTime):
+    def render(self, screen):
         '''
             Função responsável por desenhar o mapa na tela
-            deltaTime -> váriaveis que guarda o tempo que se passou entre dois frames
+            screen -> surface principal da tela do jogo
         '''
-        pass
+
+        self.drawMapSurface(screen)
