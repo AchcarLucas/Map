@@ -75,21 +75,28 @@ class Map:
         xMaxTiles = np.ceil(screenSize[0] / self.dimension_tiles[0]) + 1
         yMaxTiles = np.ceil(screenSize[1] / self.dimension_tiles[1]) + 1
 
+        # for responsável por desenhar o mapa na tela (desenha apenas a porção que irá aparecer na tela)
         for y in range(0, int(yMaxTiles)):
+            # limita o tilesY a valores positivos
             tilesY = np.maximum(0, y + int(self.offset[1] / self.dimension_tiles[1]))
 
+            # verifica se o tilesY é maior que a estrutura, se for sai do for (não tem mais mapa para desenhar)
             if(tilesY >= self.map_line):
                 break
 
             for x in range(0, int(xMaxTiles)):
+                # limita o tilesX a valores positivos
                 tilesX = np.maximum(0, x - int(self.offset[0] / self.dimension_tiles[0]))
 
+                # verifica se o tilesX é maior que a estrutura, se for sai do for (não tem mais colunas para desenhar)
                 if(tilesX >= self.map_column):
                     break
 
-                tile = self.struct_map[tilesY][tilesX]
+                # pega tiles correspondente ao tilesX e tilesY da posição
+                currentTile = self.struct_map[tilesY][tilesX]
 
-                screen.blit(self.tile_sheets[tile], (
+                # desenha o tiles na tela usando o sistema de offset
+                screen.blit(self.tile_sheets[currentTile], (
                                                     (tilesX * self.dimension_tiles[0] + self.offset[0]), 
                                                     (tilesY * self.dimension_tiles[1] - self.offset[1])
                                                     ))
