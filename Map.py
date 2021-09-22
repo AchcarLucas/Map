@@ -37,8 +37,10 @@ class Map:
         self.dimension_map = (self.map_column * self.dimension_tiles[0], 
                               self.map_line * self.dimension_tiles[1])
 
-        print(f'Width Map: {self.dimension_tiles[0]}')
-        print(f'Height Map: {self.dimension_tiles[1]}')
+        print(f'Width Map: {self.getMapSize()[0]}')
+        print(f'Height Map: {self.getMapSize()[1]}')
+        print(f'Tiles Width: {self.dimension_tiles[0]}')
+        print(f'Tiles Height: {self.dimension_tiles[1]}')
         print(f'Map Name: {self.map_name}')
 
     def getStructMap(self):
@@ -65,6 +67,12 @@ class Map:
             setting do offset da posição do mapa
         '''
         self.offset = offset
+
+    def getMapSize(self):
+        '''
+            getting para informar o tamanho do mapa
+        '''
+        return (self.map_column * self.dimension_tiles[0], self.map_line * self.dimension_tiles[1])
 
     def drawMapSurface(self, screen):
         '''

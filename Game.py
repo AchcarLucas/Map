@@ -163,7 +163,6 @@ class Game():
         if(keys[pygame.K_s]):
             self.moveMapY += 1
 
-
         self.currentMap.setOffset((self.moveMapX, self.moveMapY))
 
         self.currentMap.update(deltaTime)
