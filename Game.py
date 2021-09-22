@@ -60,11 +60,11 @@ class Game():
         temp_struct_map[19, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
         temp_struct_map[20, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
         temp_struct_map[21, ] = [30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35, 30, 31, 32, 33, 34, 35]
+        ################################
 
+        # variável para a movimentação do mapa
         self.moveMapX = 0
         self.moveMapY = 0
-
-        ################################
 
         # lista contendo todos os mapas
         self.maps = []
@@ -72,6 +72,7 @@ class Game():
         # carrega os mapas
         self.maps.append(map.Map(self.tilesheets[1], (32, 32), temp_struct_map, offset = (self.moveMapX, self.moveMapY), map_name='Mapa 1'))
 
+        # mapa atual
         self.currentMap = self.maps[0]
         
     def loadSpriteSheetPacket(self, imagePath, spriteSheetName, dimensionSheet:(int, int), scaleSprite = (1, 1)):
