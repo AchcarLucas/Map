@@ -4,6 +4,8 @@ import os
 
 import Map as map
 
+# Código desenvolvido por Lucas Campos Achcar para a aula de monitoria em Computação Cientifica em Python
+
 class Game():
     '''
         Classe responsável por gerenciar o jogo
